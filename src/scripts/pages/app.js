@@ -17,6 +17,17 @@ class App {
     if (this.#content) {
       this.#content.style.viewTransitionName = 'navigation';
     }
+    // === REGISTER SERVICE WORKER SEKALI SAJA ===
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => {
+            console.log('Service Worker registered!', reg);
+          }).catch(err => {
+            console.error('Service Worker failed:', err);
+          });
+      });
+    }
   }
 
   get mainContentElement() {
@@ -72,7 +83,10 @@ class App {
     } else {
       return renderContent();
     }
+
   }
+
+
 }
 
 export default App;

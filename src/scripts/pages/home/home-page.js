@@ -43,6 +43,7 @@ export default class HomePage {
         }
       });
     }
+    
   }
 
   // showLoading() {

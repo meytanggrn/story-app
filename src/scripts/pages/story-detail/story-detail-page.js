@@ -1,5 +1,6 @@
 import StoryDetailPresenter from './story-detail-presenter.js';
 import { playFadeTransition } from '../../utils/transitionHelper.js';
+import { saveStory, getAllStories } from '../../utils/db.js'; // pastikan path sesuai struktur project
 
 export default class StoryDetailPage {
   constructor() {
@@ -18,6 +19,7 @@ export default class StoryDetailPage {
       <main id="main-content" tabindex="-1" class="detail-main fade-in">
         <section id="detail-section">
           <div id="detail-loading">Memuat detail...</div>
+          <button id="save-offline-btn" disabled>Memuat...</button>
         </section>
       </main>
     `;
@@ -29,11 +31,42 @@ export default class StoryDetailPage {
       this.showError('ID story tidak valid.');
       return;
     }
+    // Saat pertama render, disable tombol offline
+    const saveBtn = document.getElementById('save-offline-btn');
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Memuat...';
+
+    // Load story dari API
     this.presenter.loadDetail(id);
+
+    // Cek jika sudah tersimpan di offline, baru aktifkan tombol
+    const offlineStories = await getAllStories();
+    const isAlreadySaved = offlineStories.some(s => String(s.id) === String(id));
+    if (isAlreadySaved) {
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Sudah Tersimpan Offline';
+      saveBtn.classList.add('saved-offline');
+    } else {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Simpan Offline';
+      saveBtn.classList.remove('saved-offline');
+      // Tunggu storyObj tersedia setelah presenter.loadDetail selesai
+      saveBtn.onclick = async () => {
+        if (!this.story) {
+          alert('Story belum siap disimpan.');
+          return;
+        }
+        await saveStory(this.story);
+        alert('Story tersimpan offline!');
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Sudah Tersimpan Offline';
+        saveBtn.classList.add('saved-offline');
+      };
+    }
   }
 
   showStoryDetail(story) {
-    this.story = story;
+    this.story = story; // Pastikan property story diisi untuk saveStory
 
     const locString = story.lat && story.lon
       ? `<div style="margin-top:.5em;">
@@ -69,8 +102,12 @@ export default class StoryDetailPage {
             <div id="detail-map" style="width:100%;height:250px;border-radius:12px;overflow:hidden"></div>
           </div>
         ` : ''}
+        <button id="save-offline-btn">Simpan Offline</button>
       </article>
     `;
+
+    // Aktifkan kembali event handler simpan offline pada tombol baru
+    this.afterRenderOfflineBtn();
 
     const backBtn = document.getElementById('btn-back');
     if (backBtn) {
@@ -92,6 +129,34 @@ export default class StoryDetailPage {
         L.marker([story.lat, story.lon]).addTo(map).bindPopup('Lokasi Story').openPopup();
         setTimeout(() => map.invalidateSize(), 200);
       }, 100);
+    }
+  }
+
+  // Fungsi terpisah agar tombol simpan tetap aktif setelah showStoryDetail render ulang
+  async afterRenderOfflineBtn() {
+    const id = this.getIdFromUrl();
+    const saveBtn = document.getElementById('save-offline-btn');
+    const offlineStories = await getAllStories();
+    const isAlreadySaved = offlineStories.some(s => String(s.id) === String(id));
+    if (isAlreadySaved) {
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Sudah Tersimpan Offline';
+      saveBtn.classList.add('saved-offline');
+    } else {
+      saveBtn.disabled = false;
+      saveBtn.textContent = 'Simpan Offline';
+      saveBtn.classList.remove('saved-offline');
+      saveBtn.onclick = async () => {
+        if (!this.story) {
+          alert('Story belum siap disimpan.');
+          return;
+        }
+        await saveStory(this.story);
+        alert('Story tersimpan offline!');
+        saveBtn.disabled = true;
+        saveBtn.textContent = 'Sudah Tersimpan Offline';
+        saveBtn.classList.add('saved-offline');
+      };
     }
   }
 
