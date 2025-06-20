@@ -9,6 +9,7 @@ function renderNavbar() {
       <li><a href="#/home">Beranda</a></li>
       <li><a href="#/new-story">Add Story</a></li>
       <li><a href="#/about">About</a></li>
+      <li><a href="#/offline">Offline</a></li>
       <li><a href="#" id="logout-link">Logout</a></li>
       <li><button id="notif-btn" style="margin-left:8px;">Aktifkan Notifikasi</button></li>
     `;

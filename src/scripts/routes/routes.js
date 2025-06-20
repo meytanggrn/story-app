@@ -5,6 +5,7 @@ import LoginPage from '../pages/auth/login/login-page';
 import RegisterPage from '../pages/auth/register/register-page';
 import NewStoryPage from '../pages/new-story/new-story-page';
 import StoryDetailPage from '../pages/story-detail/story-detail-page';
+import OfflinePage from '../pages/offline-page/offline-page';
 
 const routes = {
   '/': LoginPage,
@@ -14,6 +15,7 @@ const routes = {
   '/register': RegisterPage,
   '/new-story': NewStoryPage,
   '/story-detail/:id': StoryDetailPage,
+  '/offline': OfflinePage,
 };
 
 

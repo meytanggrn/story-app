@@ -262,7 +262,7 @@ header {
 }
 
 
-#story-grid {
+#story-grid, #story-grid, #offline-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
@@ -645,6 +645,7 @@ textarea {
 .skip-link:focus {
   top: 0;
 }
+
 
 
 /* Write your styles more here */
