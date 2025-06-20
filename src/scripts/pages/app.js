@@ -62,8 +62,9 @@ class App {
     const url = getActiveRoute();
     const PageClass = routes[url];
 
+    // 404 Fallback:
     if (!PageClass) {
-      this.#content.innerHTML = `<h2>404 Not Found</h2>`;
+      this.#content.innerHTML = await (new NotFoundPage()).render();
       return;
     }
 
@@ -83,6 +84,7 @@ class App {
     } else {
       return renderContent();
     }
+
 
   }
 

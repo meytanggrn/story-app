@@ -17,5 +17,28 @@
       "sizes": "512x512",
       "type": "image/png"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tambah Story Baru",
+      "short_name": "Tambah",
+      "description": "Tambah data/story baru dengan cepat",
+      "url": "/#/new-story",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshots/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "platform": "wide"
+    },
+    {
+      "src": "/screenshots/screenshot-mobile.png",
+      "sizes": "360x720",
+      "type": "image/png",
+      "platform": "narrow"
+    }
   ]
 }
