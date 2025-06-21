@@ -39,9 +39,9 @@ const urlsToCache = [
     '/manifest.json',
     '/icons/icon-192.jpg',
     '/icons/icon-512.png',
-    '/src/scripts/app.js',      // JS utama (ganti sesuai struktur)
-    '/src/styles/styles.css',      // CSS utama (ganti sesuai struktur)
-    // Tambahkan lagi jika perlu
+    '/assets/index-qZioCDqQ.js',    
+    '/assets/index-CSTQb7tk.css',     
+
 ];
 
 

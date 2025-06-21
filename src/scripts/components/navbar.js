@@ -9,7 +9,7 @@ function renderNavbar() {
       <li><a href="#/home">Beranda</a></li>
       <li><a href="#/new-story">Add Story</a></li>
       <li><a href="#/about">About</a></li>
-      <li><a href="#/offline">Offline</a></li>
+      <li><a href="#/offline">Cerita Tersimpan</a></li>
       <li>
           <button id="notif-btn" style="margin-left:8px;display:flex;align-items:center;gap:6px;">
             <svg id="notif-icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">

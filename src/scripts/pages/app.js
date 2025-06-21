@@ -1,7 +1,7 @@
 import routes from '../routes/routes';
 import { getActiveRoute } from '../routes/url-parser';
 import renderNavbar from '../../scripts/components/navbar';
-
+import NotFoundPage from '../../scripts/pages/not-found/not-found-page';
 class App {
   #content = null;
   #drawerButton = null;
