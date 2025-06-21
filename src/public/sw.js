@@ -1,10 +1,19 @@
 self.addEventListener('push', event => {
-    const data = event.data ? event.data.json() : {};
+    let data = {};
+    if (event.data) {
+        // Coba parse JSON, fallback ke text jika gagal
+        try {
+            data = event.data.json();
+        } catch {
+            data = { body: event.data.text() }; // Fallback: pakai sebagai body text
+        }
+    }
+
     const title = data.title || 'Notifikasi Baru!';
     const options = {
         body: data.body || 'Ada update baru dari aplikasi.',
-        icon: '/icons/icon-192.png',
-        data: data, // simpan data tambahan (misal id)
+        icon: '/icons/icon-192.jpg',
+        data: data,
     };
     event.waitUntil(
         self.registration.showNotification(title, options)

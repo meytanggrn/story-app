@@ -8,7 +8,7 @@ export default class LoginPresenter {
     }
 
     async handleLogin({ email, password }) {
-        this.view.showMessage("mendaftarkan")
+        showLoading("Login")
         try {
             const result = await StoryAPI.login({ email, password });
             if (result.error) {

@@ -102,7 +102,7 @@ export default class StoryDetailPage {
             <div id="detail-map" style="width:100%;height:250px;border-radius:12px;overflow:hidden"></div>
           </div>
         ` : ''}
-        <button id="save-offline-btn">Simpan Offline</button>
+        <button id="save-offline-btn" class="btn-save-offline">Simpan Offline</button>
       </article>
     `;
 
