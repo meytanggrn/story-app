@@ -17,7 +17,7 @@ class App {
     if (this.#content) {
       this.#content.style.viewTransitionName = 'navigation';
     }
-    // === REGISTER SERVICE WORKER SEKALI SAJA ===
+    // register service worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
