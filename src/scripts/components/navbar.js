@@ -35,7 +35,10 @@ function renderNavbar() {
     // Listener Notif
     const notifBtn = document.getElementById('notif-btn');
     if (notifBtn) {
-      notifBtn.onclick = subscribeUserToPush;
+      notifBtn.onclick = () => {
+        console.log('Tombol notifikasi diklik!');
+        subscribeUserToPush();
+      };
     }
 
   } else {
